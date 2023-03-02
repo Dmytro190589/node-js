@@ -45,12 +45,15 @@ function removeContact(contactId) {
 
 function addContact(name, email, phone) {
 
-  const contact = { name, email, phone, id: Date.now() }
 
   fs.readFile(contactsPath, 'utf-8', (error, data) => {
     if (error) throw error;
 
     const items = JSON.parse(data);
+
+    // для красоты id пока так 
+    const contact = { name, email, phone, id: JSON.stringify(items.length + 1) }
+
     items.push(contact);
 
     const result = JSON.stringify(items)
