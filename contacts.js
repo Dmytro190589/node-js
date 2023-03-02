@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
+
 let contactsPath = path.join(__dirname, './db/contacts.json')
 
 function listContacts() {
@@ -34,6 +35,7 @@ function removeContact(contactId) {
     fs.writeFile(contactsPath, result, error => {
       if (error) throw error;
       console.table(items)
+      return items;
     })
   })
 }
@@ -51,11 +53,10 @@ function addContact(name, email, phone) {
 
     items.push(contact);
 
-    const result = JSON.stringify(items)
-
-    fs.writeFile(contactsPath, result, (error) => {
+    fs.writeFile(contactsPath, JSON.stringify(items, null, 2), (error) => {
       if (error) throw error;
       console.table(items)
+      return items;
     })
   })
 }
