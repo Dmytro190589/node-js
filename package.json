@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Dmytro190589/node-js#readme",
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "yargs": "^17.7.1"
   }
 }

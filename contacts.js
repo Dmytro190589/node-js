@@ -21,7 +21,7 @@ function getContactById(contactId) {
       throw error
     }
     const items = JSON.parse(data)
-    const result = items.filter(item => item.id === contactId)
+    const result = items.filter(item => item.id === JSON.stringify(contactId))
     console.table(result)
   }
   )
@@ -33,7 +33,7 @@ function removeContact(contactId) {
       throw error
     }
     const items = JSON.parse(data)
-    const index = items.findIndex(item => item.id === contactId)
+    const index = items.findIndex(item => item.id === JSON.stringify(contactId))
     items.splice(index, 1)
     const result = JSON.stringify(items)
     fs.writeFile(contactsPath, result, error => {
@@ -51,8 +51,8 @@ function addContact(name, email, phone) {
 
     const items = JSON.parse(data);
 
-    // для красоты id пока так 
-    const contact = { name, email, phone, id: JSON.stringify(items.length + 1) }
+
+    const contact = { name, email, phone, id: JSON.stringify(Date.now()) }
 
     items.push(contact);
 
