@@ -14,7 +14,6 @@ function listContacts() {
     console.table(JSON.parse(data))
   })
 }
-listContacts()
 
 function getContactById(contactId) {
   fs.readFile(contactsPath, 'utf-8', (error, data) => {
@@ -23,11 +22,11 @@ function getContactById(contactId) {
     }
     const items = JSON.parse(data)
     const result = items.filter(item => item.id === contactId)
-    console.log(result)
+    console.table(result)
   }
   )
 }
-getContactById('2');
+
 function removeContact(contactId) {
   fs.readFile(contactsPath, 'utf-8', (error, data) => {
     if (error) {
@@ -36,10 +35,14 @@ function removeContact(contactId) {
     const items = JSON.parse(data)
     const index = items.findIndex(item => item.id === contactId)
     items.splice(index, 1)
-    console.log(items)
+    const result = JSON.stringify(items)
+    fs.writeFile(contactsPath, result, error => {
+      if (error) throw error;
+      console.table(items)
+    })
   })
 }
-removeContact('3');
+
 function addContact(name, email, phone) {
 
   const contact = { name, email, phone, id: Date.now() }
@@ -58,7 +61,6 @@ function addContact(name, email, phone) {
     })
   })
 }
-addContact('dima', 'mac@bk.ru', '+2222222')
 module.exports = {
   listContacts,
   getContactById,
