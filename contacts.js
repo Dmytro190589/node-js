@@ -2,12 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 let contactsPath = path.join(__dirname, './db/contacts.json')
-/*
- * Раскомментируй и запиши значение
- * const contactsPath = ;
- */
 
-// TODO: задокументировать каждую функцию
 function listContacts() {
   fs.readFile(contactsPath, 'utf-8', (error, data) => {
     if (error) throw error;
